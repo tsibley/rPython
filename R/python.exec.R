@@ -9,9 +9,10 @@ python.exec <- function( python.code, get.exception = TRUE ){
         return( exit.status )
     }
 
-    .C( "py_exec_code", "try:del _r_error\nexcept Exception:pass", PACKAGE = "rPython" )
+    # removel the previous exception in python, if any
+    .C( "py_exec_code", "try:del _r_error\nexcept Exception:pass", exit.status = integer(1), PACKAGE = "rPython" )
 
-    # Creating the call
+    # Creating the call; the call is embeded into a try-catch expression in order to capture possible exceptions
     if( length( python.code ) == 1 )
         python.code <- strsplit(python.code, "\n|\r\n" ) 
 

@@ -23,7 +23,7 @@ fi
 # Extract the linker and include flags for python
 : ${PYTHONCONFIG=`which python-config`}
 if test -z "${PYTHONCONFIG}"; then
-  echo "could not determine R_HOME"
+  echo "could not locate python-config"
   exit 1
 fi
 

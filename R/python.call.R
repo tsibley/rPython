@@ -14,11 +14,11 @@ python.call <- function( py.foo, ... ){
     n.args.vect <- sum( !which.dict )
     n.args.dict <- sum(  which.dict )
 
-    foo.args.dict <- toJSON( foo.args[  which.dict ] )
-    foo.args.vect <- toJSON( foo.args[ !which.dict ] )
+    #foo.args.dict <- toJSON( foo.args[  which.dict ] )
+    #foo.args.vect <- toJSON( foo.args[ !which.dict ] )
 
-    #foo.args.dict <- toJSON( foo.args[  which.dict ], collapse = " " )
-    #foo.args.vect <- toJSON( foo.args[ !which.dict ], collapse = " " )
+    foo.args.dict <- toJSON( foo.args[  which.dict ], collapse = " " )
+    foo.args.vect <- toJSON( foo.args[ !which.dict ], collapse = " " )
 
     # Creating the call
 

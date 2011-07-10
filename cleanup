@@ -1,0 +1,6 @@
+#!/bin/sh
+
+rm src/pycall.o
+rm src/rPython.so
+rm config.log
+rm config.status

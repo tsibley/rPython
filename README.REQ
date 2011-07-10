@@ -1,0 +1,12 @@
+Package rPython depends on Python (>= 2.7).
+
+For Linux and other Unix-like systems, Python needs to be installed. The dev packages 
+for Pyton (python-dev in Debian-like distributions) should be installed. For instance,
+on an Ubuntu system, assuming Python 2.7 being used, the required packages are
+
+python2.7
+python2.7-dev
+
+
+On a Windows system, 
+

@@ -17,12 +17,8 @@ python.call <- function( py.foo, ... ){
     foo.args.dict <- toJSON( foo.args[  which.dict ] )
     foo.args.vect <- toJSON( foo.args[ !which.dict ] )
 
-    # Passing data to python
-
-    #rJython$exec( paste( "_r_args_dict ='", foo.args.dict, "'", sep = "" ) )
-    #rJython$exec( paste( "_r_args_vect ='", foo.args.vect, "'", sep = "" ) )
-    #rJython$exec( "_r_args_dict = json.loads( _r_args_dict )" )
-    #rJython$exec( "_r_args_vect = json.loads( _r_args_vect )" )
+    #foo.args.dict <- toJSON( foo.args[  which.dict ], collapse = " " )
+    #foo.args.vect <- toJSON( foo.args[ !which.dict ], collapse = " " )
 
     # Creating the call
 

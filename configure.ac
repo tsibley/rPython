@@ -27,8 +27,22 @@ if test -z "${PYTHONCONFIG}"; then
   exit 1
 fi
 
-PKG_LIBS=`$PYTHONCONFIG --libs`
+#PKG_LIBS=`$PYTHONCONFIG --libs`		# valor original
+PKG_LIBS=`$PYTHONCONFIG --ldflags`			# valor modificado	
 PKG_CFLAGS=`$PYTHONCONFIG --includes`
+
+# Find the .so library for python
+: ${PYTHON=`which python`}
+if test -z "${PYTHON}"; then
+  echo "could not locate python"
+  exit 1
+fi
+
+PYTHONLIBFILE=libpython`$PYTHON -c "import sys; print sys.version[[:3]]"`.so
+
+PKG_CFLAGS="$PKG_CFLAGS -D PYTHONLIBFILE=$PYTHONLIBFILE"
+
+
 
 AC_SUBST(PKG_LIBS)
 AC_SUBST(PKG_CFLAGS)

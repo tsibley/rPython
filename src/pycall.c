@@ -1,7 +1,15 @@
 #include <Python.h>
 #include <string.h>
+#include <dlfcn.h>
+
+#define xstr(a) str(a)
+#define str(a) #a
 
 void py_init(){
+
+    //dlopen( "libpython2.7.so.1.0", RTLD_NOW | RTLD_GLOBAL );
+    dlopen( xstr(PYTHONLIBFILE), RTLD_NOW | RTLD_GLOBAL );		// Passed as a macro at compile time
+
     Py_Initialize();
     PyRun_SimpleString("import json");
 }

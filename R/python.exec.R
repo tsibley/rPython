@@ -17,7 +17,7 @@ python.exec <- function( python.code, get.exception = TRUE ){
         python.code <- strsplit(python.code, "\n|\r\n" ) 
 
     python.code <- as.character( sapply( python.code, function( x ) paste( "\t", x, sep = "" ) ) )
-    python.code <- paste( "try:", paste( python.code, collapse = "\n" ), "except Exception, e:_r_error = e.__str__()\n", sep = "\n" )
+    python.code <- paste( "try:", paste( python.code, collapse = "\n" ), "except Exception as e:_r_error = e.__str__()\n", sep = "\n" )
 
     exit.status <- .C( "py_exec_code", python.code, exit.status = integer(1), PACKAGE = "rPython" )$exit.status          # Exit status always good as any exception is captured
 

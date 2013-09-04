@@ -1,6 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 # This file is based on configure.ac file distributed along with the rJava package
-AC_INIT(rPython, 0.2, cgb@datanalytics.com)
+
+AC_INIT(rPython, 0.3, cgb@datanalytics.com)
 AC_CONFIG_SRCDIR([src])
 #AC_CONFIG_HEADER([src/config.h])
 
@@ -20,10 +21,24 @@ if test -n "$RLD"; then
    has_R_shlib=yes
 fi
 
+MYPYTHONCONFIG=python-config
+MYPYTHON=python
+
+# find user defined python version, if set
+if test -z "${RPYTHON_PYTHON_VERSION}"
+then
+  echo "a specific python version to use was not provided"
+  echo "defaulting to the standard python in the system"
+else
+  MYPYTHON=python${RPYTHON_PYTHON_VERSION}
+  MYPYTHONCONFIG=python${RPYTHON_PYTHON_VERSION}-config
+fi
+
+
 # Extract the linker and include flags for python
-: ${PYTHONCONFIG=`which python-config`}
+: ${PYTHONCONFIG=`which ${MYPYTHONCONFIG}`}
 if test -z "${PYTHONCONFIG}"; then
-  echo "could not locate python-config"
+  echo "could not locate ${MYPYTHONCONFIG}"
   exit 1
 fi
 
@@ -32,13 +47,13 @@ PKG_LIBS=`$PYTHONCONFIG --ldflags`			# valor modificado
 PKG_CFLAGS=`$PYTHONCONFIG --includes`
 
 # Find the .so library for python
-: ${PYTHON=`which python`}
+: ${PYTHON=`which ${MYPYTHON}`}
 if test -z "${PYTHON}"; then
-  echo "could not locate python"
+  echo "could not locate ${MYPYTHON}"
   exit 1
 fi
 
-PYTHONLIBFILE=libpython`$PYTHON -c "import sys; print sys.version[[:3]]"`.so
+PYTHONLIBFILE=libpython`$PYTHON -c "import sys; print(sys.version[[:3]])"`.so
 
 PKG_CFLAGS="$PKG_CFLAGS -D PYTHONLIBFILE=$PYTHONLIBFILE"
 

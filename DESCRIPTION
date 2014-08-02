@@ -1,6 +1,6 @@
 Package: rPython
-Version: 0.0-4
-Date: 2013-09-04
+Version: 0.0-5
+Date: 2014-08-02
 Title: Package allowing R to call Python
 Author: Carlos J. Gil Bellosta
 Maintainer: Carlos J. Gil Bellosta <cgb@datanalytics.com>

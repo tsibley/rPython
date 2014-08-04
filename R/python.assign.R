@@ -10,9 +10,9 @@ python.assign <- function( var.name, value ){
     # Creating the call
 
     python.command <- c( 
-        paste( var.name , "='", value, "'",  sep = " " ),
+        paste( var.name , "=r'''", value, "'''",  sep = " " ),
         paste( var.name , "= json.loads(", var.name, ")", sep = "" ),
-        paste( "if len(",  var.name , ") == 1:", sep = "" ),
+        paste( "if type(", var.name, ") is list and len(",  var.name , ") == 1:", sep = "" ),
         paste( "    ", var.name, "=", var.name, "[0]" ) 
     )
 
